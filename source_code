@@ -1,0 +1,58 @@
+### The game will generate a random number ###
+### We are going to track how many times it takes the user to guess the number ###
+
+import random
+
+### Welcome page ###
+print("Welcome to the number guessing ganme!")
+
+playing = input("Do you want to play? ")
+if playing.lower() != "yes":
+	quit()
+
+print("Okay, let's begin. You will have 3 guesses.")
+
+### User will set the range ###
+top_of_range = input("The range will be between 0 and a number you type: ")
+
+### isdigit will verify input is a digit and not text ###
+### int() will convert input into an integer ###
+if top_of_range.isdigit():
+	top_of_range = int(top_of_range)
+
+	### Number must be larger than 0 ###
+	if top_of_range <= 0:
+		print("Please type a number larger than 0 next time.")
+		quit()
+
+else:
+	print("Please type a number next time.")
+	quit()
+
+### randrange only includes numbers between the start, stop numbers provided ###
+### randint will include the start, stop numbers in the range ###
+random_number = random.randrange(0, top_of_range)
+guesses = 0 ### how many guesses the user has made ###
+attempts = 3 ### number of attempts allowed ###
+
+while guesses < attempts:
+	guesses = guesses + 1
+	user_guess = input("Make a guess: ")
+	if user_guess.isdigit():
+		user_guess = int(user_guess)
+
+	else:
+		print("Please type a number next time.")
+		continue
+
+	if user_guess == random_number:
+		print("You got it in " + str(guesses) + " attempts!")
+		break
+	else:
+		if user_guess > random_number:
+			print("Your guess was above the number.")
+		elif user_guess < random_number:
+			print("Your guess was below the number.")
+
+	if guesses == attempts:
+		print("You ran out of guesses! Better luck next time.")
